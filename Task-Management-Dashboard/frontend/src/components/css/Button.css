@@ -1,0 +1,212 @@
+.button {
+  --top-start: #3b82f6;
+  --top-end: #1d4ed8;
+  --bottom: #1e40af;
+  --glow: rgba(59, 130, 246, 0.5);
+
+  appearance: none;
+  position: relative;
+  border: none;
+  padding: 0 8px 12px;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ========================= */
+/* TOP */
+/* ========================= */
+
+.button-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 20px;
+
+  color: white;
+  font-weight: 600;
+
+  transform: translateY(0);
+
+  transition: transform 0.2s ease;
+
+  user-select: none;
+}
+
+.button-top::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  background-image: radial-gradient(
+    var(--top-start),
+    var(--top-end)
+  );
+
+  border-radius: inherit;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.2),
+    0 2px 6px rgba(0,0,0,.25);
+
+  transition: all .2s ease;
+}
+
+/* ========================= */
+/* BOTTOM */
+/* ========================= */
+
+.button-bottom {
+  position: absolute;
+
+  left: 4px;
+  bottom: 4px;
+
+  width: calc(100% - 8px);
+  height: calc(100% - 10px);
+
+  z-index: -1;
+
+  background: var(--bottom);
+
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.35),
+    inset 0 -2px 4px rgba(0,0,0,.3);
+}
+
+/* ========================= */
+/* BASE */
+/* ========================= */
+
+.button-base {
+  position: absolute;
+
+  top: 4px;
+  left: 0;
+
+  width: 100%;
+  height: calc(100% - 4px);
+
+  z-index: -2;
+
+  background: rgba(0,0,0,.15);
+
+  box-shadow:
+    0 1px 1px var(--glow),
+    inset 0 2px 2px rgba(0,0,0,.25);
+}
+
+/* ========================= */
+/* ACTIVE */
+/* ========================= */
+
+.button:active .button-top {
+  transform: translateY(6px);
+}
+
+.button:active .button-bottom {
+  height: calc(100% - 16px);
+}
+
+/* ========================= */
+/* SHAPES */
+/* ========================= */
+
+.rectangle .button-top::after,
+.rectangle .button-bottom,
+.rectangle .button-base {
+  border-radius: 10px;
+}
+
+.square {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+}
+
+.square .button-top::after,
+.square .button-bottom,
+.square .button-base {
+  border-radius: 12px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+}
+
+.circle .button-top::after,
+.circle .button-bottom,
+.circle .button-base {
+  border-radius: 50%;
+}
+
+/* ========================= */
+/* SIZES */
+/* ========================= */
+
+.small {
+  min-width: 100px;
+  font-size: 12px;
+}
+
+.medium {
+  min-width: 150px;
+  font-size: 14px;
+}
+
+.large {
+  min-width: 220px;
+  font-size: 18px;
+}
+
+/* ========================= */
+/* VARIANTS */
+/* ========================= */
+
+.primary {
+  --top-start: #60a5fa;
+  --top-end: #2563eb;
+  --bottom: #1e40af;
+  --glow: rgba(59,130,246,.6);
+}
+
+.success {
+  --top-start: #4ade80;
+  --top-end: #16a34a;
+  --bottom: #166534;
+  --glow: rgba(34,197,94,.6);
+}
+
+.danger {
+  --top-start: #f87171;
+  --top-end: #dc2626;
+  --bottom: #991b1b;
+  --glow: rgba(239,68,68,.6);
+}
+
+.default {
+  --top-start: #9ca3af;
+  --top-end: #4b5563;
+  --bottom: #374151;
+  --glow: rgba(156,163,175,.6);
+}
+
+/* ========================= */
+/* DISABLED */
+/* ========================= */
+
+.button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.button:disabled .button-top {
+  transform: none;
+}
