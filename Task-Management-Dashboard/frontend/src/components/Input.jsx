@@ -19,6 +19,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         autoComplete={autoComplete}
+        placeholder=" "
         className="input"
       />
       <label className="user-label">{label}</label>
