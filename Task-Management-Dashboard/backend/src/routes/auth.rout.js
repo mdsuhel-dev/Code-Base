@@ -5,6 +5,8 @@ const authRouter = Router()
 
 authRouter.post("/register", authController.register)
 
-authRouter.get("/get-me", authController.getMe)
+authRouter.get("/me", authController.getMe)
+
+authRouter.post("/login", authController.login)
 
 export default authRouter

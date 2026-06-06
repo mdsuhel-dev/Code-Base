@@ -1,32 +1,39 @@
-import React from 'react';
-import useForm from '../hooks/useForms';
-import Button from '../components/Button';
-import Input from '../components/Input';
+import React from "react";
+import useForm from "../hooks/useForms";
+import Button from "../components/Button";
+import Input from "../components/Input";
+import { signup } from "../api/authApi";
 
 const SignUp = () => {
-    
-    const {formData,handleChange}=useForm({
-        username:"",
-        email:"",
-        password:"",
-        confirmPassword:"",
-    })
+  const { formData, handleChange } = useForm({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        if (formData.confirmPassword !== formData.password) {
-            alert("password not matched")
-            return
-        }
-        const {confirmPassword,...userData} = formData
-        console.log(userData);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.confirmPassword !== formData.password) {
+      alert("password not matched");
+      return;
     }
-   
+    const { confirmPassword, ...userData } = formData;
+    console.log(userData);
 
+    try {
+      const response = await signup(userData);
+      console.log(response.data);
+    } catch (error) {
+      const message = error.response?.data?.message || "Something went wrong";
+      console.log(message);
+      alert(message);
+    }
+  };
 
-    return (
-        <form onSubmit={handleSubmit}>
-        <Input
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input
         label="User Name"
         type="text"
         name="username"
@@ -58,9 +65,9 @@ const SignUp = () => {
         onChange={handleChange}
         required
       />
-      <Button type='submit'>Sign Up</Button>
+      <Button type="submit">Sign Up</Button>
     </form>
-    );
-}
+  );
+};
 
 export default SignUp;
